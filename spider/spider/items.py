@@ -8,13 +8,13 @@
 import scrapy
 
 
-class SpiderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class MyItem(scrapy.Item):
     title = scrapy.Field()
-    link = scrapy.Field()
-    desc = scrapy.Field()
-    pass
+    url = scrapy.Field()
+    time = scrapy.Field()
+    text = scrapy.Field()
+    domain = scrapy.Field()
+
 
 class SegmentfaultItem(scrapy.Item):
     title = scrapy.Field()

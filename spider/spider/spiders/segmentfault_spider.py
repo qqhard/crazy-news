@@ -1,5 +1,5 @@
 import scrapy
-from spider.items import SegmentfaultItem
+from spider.items import MyItem
 import re
 
 class SegmentfaultSpider(scrapy.spiders.Spider):
@@ -27,15 +27,10 @@ class SegmentfaultSpider(scrapy.spiders.Spider):
                 yield request
 
     def parse_page(self, response):
-        item = SegmentfaultItem()
+        item = MyItem()
         item['title'] = response.xpath('//*[@id="articleTitle"]/a/text()').extract_first()
         item['url'] = response.url
         item['time'] = response.xpath('//a[@class=\'text-muted\']/text()').extract_first()
         item['text'] = response.xpath('//div[@class=\'article fmt article__content\']').extract_first()
+        item['domain'] = 'segmentfault'
         yield item
-
-    def _getBlogList(self, response):
-        for sel in response.xpath("//section[@class=\"stream-list__item\"]"):
-            url = sel.xpath("//h2[@class=\"title\"]/a/@href").extract()
-            request = scrapy.Request("https://segmentfault.com"+url,callback=self.parse_page)
-            yield request
