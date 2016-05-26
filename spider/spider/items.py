@@ -15,3 +15,10 @@ class SpiderItem(scrapy.Item):
     link = scrapy.Field()
     desc = scrapy.Field()
     pass
+
+class SegmentfaultItem(scrapy.Item):
+    title = scrapy.Field()
+    url = scrapy.Field()
+    time = scrapy.Field()
+    text = scrapy.Field()
+    domain = 'Segmentfault'
