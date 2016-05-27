@@ -13,6 +13,7 @@ class MyItem(scrapy.Item):
     url = scrapy.Field()
     time = scrapy.Field()
     text = scrapy.Field()
+    words = scrapy.Field()
     domain = scrapy.Field()
 
 

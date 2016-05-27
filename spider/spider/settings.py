@@ -65,11 +65,12 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'spider.pipelines.TimePipeline': 100,
-    'spider.pipelines.TextPipeline': 200,
-    'spider.pipelines.MongoPipeline': 300,
+    'spider.pipelines.TextPipeline': 2,
+    'spider.pipelines.SegPipeline': 3,
+    'spider.pipelines.MongoPipeline': 4,
 }
 DOWNLOAD_DELAY = 1
+LOG_LEVEL = 'INFO'
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

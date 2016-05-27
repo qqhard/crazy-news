@@ -8,6 +8,8 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import time
+import jieba
+import jieba.posseg as pseg
 
 class MongoPipeline(object):
 
@@ -25,22 +27,8 @@ class TextPipeline(object):
         item['text'] = soup.get_text()
         return item
 
-class TimePipeline(object):
-
-    def __init__(self):
-        self.router = {
-            'csdn':self._csdn
-        }
-
-    def _default(self, item):
-        return item
-
-    def _csdn(self, item):
-        timeStr = item['time'].strip()
-        timeStruct = time.strptime(timeStr,'%Y-%m-%d %H:%M')
-        item['time'] = time.mktime(timeStruct)
-        return item
-
+class SegPipeline(object):
     def process_item(self, item, spider):
-        handle = self.router.get(item['domain'],self._default)
-        return handle(item)
+        words = pseg.cut(item['text'])
+        item['words'] = [(key.word,key.flag) for key in words]
+        return item
