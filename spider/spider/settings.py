@@ -13,7 +13,7 @@ BOT_NAME = 'spider'
 
 SPIDER_MODULES = ['spider.spiders']
 NEWSPIDER_MODULE = 'spider.spiders'
-
+COMMANDS_MODULE = 'spider.commands'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'spider (+http://www.yourdomain.com)'
@@ -65,7 +65,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'spider.pipelines.TimePipeline': 200,
+    'spider.pipelines.TimePipeline': 100,
+    'spider.pipelines.TextPipeline': 200,
     'spider.pipelines.MongoPipeline': 300,
 }
 DOWNLOAD_DELAY = 1

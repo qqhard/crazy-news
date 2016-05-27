@@ -6,6 +6,8 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from pymongo import MongoClient
+from bs4 import BeautifulSoup
+import time
 
 class MongoPipeline(object):
 
@@ -15,6 +17,12 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         self.page.insert_one(dict(item))
+        return item
+
+class TextPipeline(object):
+    def process_item(self, item, spider):
+        soup = BeautifulSoup(item['text'])
+        item['text'] = soup.get_text()
         return item
 
 class TimePipeline(object):
